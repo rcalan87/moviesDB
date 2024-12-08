@@ -8,65 +8,81 @@
 import SwiftUI
 
 struct MovieDetailView: View {
+    struct Styles {
+        static let titleSize = 20.0
+        static let overviewSize = 14.0
+        static let releaseDateSize = 12.0
+        static let ratingSize = 16.0
+        static let horizontalPadding = 20.0
+        static let imageHeight = 350.0
+        static let imageTopPadding = 20.0
+        static let buttonHeight = 50.0
+        static let buttonWidth = 180.0
+        static let buttonFontSize = 16.0
+        static let buttonCornerRadius = 30.0
+        static let reviewButtonTitle = "Review"
+        static let voteButtonTitle = "Vote"
+        static let myFont = "MyFont"
+        static let imageUrl = "https://image.tmdb.org/t/p/w500"
+    }
+    
     var movie: Movie
     @State var presentAlert = false
     
     var body: some View {
         VStack {
             if let posterPath = movie.posterPath {
-                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")) { result in
+                AsyncImage(url: URL(string: Styles.imageUrl + posterPath)) { result in
                         result.image?
                         .resizable()
-                        .frame(width: UIScreen.main.bounds.width, height: 350, alignment: .center)
-                        .padding(.top, 20)
+                        .frame(width: UIScreen.main.bounds.width, height: Styles.imageHeight, alignment: .center)
+                        .padding(.top, Styles.imageTopPadding)
                 }
             }
             
             VStack {
                 Text(movie.title)
-                    .font(.custom("MyFont", size: .init(20)))
+                    .font(.custom(Styles.myFont, size: Styles.titleSize))
                     .foregroundColor(._300)
                 
                 Text(movie.overview)
-                    .font(.custom("MyFont", size: 14))
-                    .padding(.horizontal, 20)
+                    .font(.custom(Styles.myFont, size: Styles.overviewSize))
+                    .padding(.horizontal, Styles.horizontalPadding)
                     .foregroundColor(._500)
                 
                 Text(movie.releaseDate.getDate() ?? .now, format: .dateTime.day().month().year())
-                    .font(.custom("MyFont", size: 12))
+                    .font(.custom(Styles.myFont, size: Styles.releaseDateSize))
                     .foregroundColor(._600)
                 
                 Text("\(movie.voteAverage, specifier: "%.1f") / 10")
-                    .font(.custom("MyFont", size: 16))
+                    .font(.custom(Styles.myFont, size: Styles.ratingSize))
                     .foregroundColor(._400)
                 
                 HStack {
                     Spacer()
 
-                    Button("Review") {
-                        print("Review")
+                    Button(Styles.reviewButtonTitle) {
                         presentAlert.toggle()
                     }
-                    .font(.custom("MyFont", size: 16))
-                    .frame(width: 180, height: 50)
+                    .font(.custom(Styles.myFont, size: Styles.buttonFontSize))
+                    .frame(width: Styles.buttonWidth, height: Styles.buttonHeight)
                     .background(Color._900,
                                 in: RoundedRectangle(
-                                    cornerRadius: 30,
+                                    cornerRadius: Styles.buttonCornerRadius,
                                     style: .continuous
                                 ))
                     .foregroundColor(._400)
                     
                     Spacer()
                     
-                    Button("Vote") {
-                        print("Vote")
+                    Button(Styles.voteButtonTitle) {
                         presentAlert.toggle()
                     }
-                    .font(.custom("MyFont", size: 16))
-                    .frame(width: 180, height: 50)
+                    .font(.custom(Styles.myFont, size: Styles.buttonFontSize))
+                    .frame(width: Styles.buttonWidth, height: Styles.buttonHeight)
                     .background(Color._500,
                                 in: RoundedRectangle(
-                                    cornerRadius: 30,
+                                    cornerRadius: Styles.buttonCornerRadius,
                                     style: .continuous
                                 ))
                     .foregroundColor(._800)
