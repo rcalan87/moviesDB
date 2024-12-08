@@ -8,33 +8,43 @@
 import SwiftUI
 
 struct MovieView: View {
+    struct Styles {
+        static let titleSize = 18.0
+        static let subtitleSize = 14.0
+        static let horizontalPadding: CGFloat = 25.0
+        static let width: CGFloat = 100.0
+        static let height: CGFloat = 100.0
+        static let myFont = "MyFont"
+        static let imageUrl = "https://image.tmdb.org/t/p/w500"
+    }
+    
     let movie: Movie
     
     var body: some View {
         NavigationLink(destination: MovieDetailView(movie: movie)) {
             HStack {
                 if let backdropPath = movie.backdropPath {
-                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath)")) { result in
+                    AsyncImage(url: URL(string: Styles.imageUrl + backdropPath)) { result in
                         result.image?
                             .resizable()
                             .scaledToFit()
                             .clipShape(Circle())
                     }
-                    .frame(width: 100, height: 100)
+                    .frame(width: Styles.width, height: Styles.height)
                     
                 }
                 
                 VStack(alignment: .leading) {
                     Text(movie.title)
-                        .font(.custom("MyFont", size: 18))
+                        .font(.custom(Styles.myFont, size: Styles.titleSize))
                         .foregroundColor(._300)
                     
                     Text(movie.releaseDate.getDate() ?? .now, format: .dateTime.day().month().year())
-                        .font(.custom("MyFont", size: 14))
+                        .font(.custom(Styles.myFont, size: Styles.subtitleSize))
                         .foregroundColor(._600)
                 }
             }
-            .padding(.horizontal, -25)
+            .padding(.horizontal, -Styles.horizontalPadding)
         }
     }
 }

@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct MoviesListView: View {
+    struct Styles {
+        static let horizontalPadding: CGFloat = 30.0
+        static let navigationBarTitle = "Movies"
+        static let errorText = "No more movies"
+    }
+    
     @StateObject var viewModel = MoviesListViewModel()
     
     var body: some View {
@@ -21,13 +27,13 @@ struct MoviesListView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal)
                 
-                Text("No more movies")
+                Text(Styles.errorText)
                     .onAppear {
-                        viewModel.fetchMovies(for: viewModel.page + 1)
+                        viewModel.fetchMovies(for: viewModel.page)
                     }
             }
-            .padding(.horizontal, -30)
-            .navigationTitle("Movies")
+            .padding(.horizontal, -Styles.horizontalPadding)
+            .navigationTitle(Styles.navigationBarTitle)
             .scrollContentBackground(.hidden)
             .background(._800)
             .preferredColorScheme(.dark)
