@@ -13,6 +13,9 @@
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		A9AB19792CF78F0500B55318 /* Exceptions for "moviesDB" folder in "moviesDB" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			assetTagsByRelativePath = {
+				Helpers/APIKeys.json = (APIKeys, );
+			};
 			membershipExceptions = (
 				Info.plist,
 			);
@@ -90,6 +93,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					APIKeys,
+				);
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {

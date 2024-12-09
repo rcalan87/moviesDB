@@ -13,6 +13,13 @@ struct moviesDBApp: App {
         WindowGroup {
             MoviesListView()
                 .environment(\.colorScheme, .dark)
+                .task {
+                    do {
+                        try await KeyConstants.loadAPIKeys()
+                    } catch {
+                        debugPrint(error.localizedDescription)
+                    }
+                }
         }
     }
 }
