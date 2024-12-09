@@ -21,4 +21,14 @@ struct Movie: Codable, Identifiable {
     let posterPath: String?
     let backdropPath: String?
     let voteAverage: Double
+    let genreIds: [Int]
+}
+
+struct GenreResponse: Codable {
+    let genres: [Genre]
+}
+
+struct Genre: Codable {
+    let id: Int
+    let name: String
 }
