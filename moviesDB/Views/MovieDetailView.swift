@@ -28,6 +28,7 @@ struct MovieDetailView: View {
     
     var movie: Movie
     @State var presentAlert = false
+    @StateObject var viewModel = MovieDetailViewModel()
     
     var body: some View {
         VStack {
@@ -55,6 +56,10 @@ struct MovieDetailView: View {
                     .foregroundColor(._600)
                 
                 Text("\(movie.voteAverage, specifier: "%.1f") / 10")
+                    .font(.custom(Styles.myFont, size: Styles.ratingSize))
+                    .foregroundColor(._400)
+                
+                Text("Genres: \(viewModel.getGenreNames(for: movie.genreIds))")
                     .font(.custom(Styles.myFont, size: Styles.ratingSize))
                     .foregroundColor(._400)
                 
@@ -113,5 +118,5 @@ struct MovieDetailView: View {
 #Preview {
     let overview = "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope."
     
-    MovieDetailView(movie: Movie(id: 0, title: "The shawshank redemption", overview: overview, releaseDate: "", posterPath: "https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg", backdropPath: "", voteAverage: 9.0))
+    MovieDetailView(movie: Movie(id: 0, title: "The shawshank redemption", overview: overview, releaseDate: "", posterPath: "https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg", backdropPath: "", voteAverage: 9.0, genreIds: [18, 80]))
 }
